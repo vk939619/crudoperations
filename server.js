@@ -5,12 +5,16 @@ const mongoose = require('mongoose')
 const Article = require('./models/article')
 const methodOverride = require('method-override')
 const port = process.env.PORT || 3000
+const DB = "mongodb+srv://vk939619:Redhat@12345@cluster0.mu1ez.mongodb.net/blogdbb?retryWrites=true&w=majority"
 
-mongoose.connect('mongodb://localhost:27017/blogdb', {
+mongoose.connect(DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
-})
+}).then(() => {
+    console.log(`connection successful`);
+}).catch((err) => console.log(`no connection`))
+
 app.use(express.urlencoded({ extended: false }))
 app.use(methodOverride('_method'))
 
